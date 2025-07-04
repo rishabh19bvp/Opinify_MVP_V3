@@ -1,0 +1,819 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Database Schema Setup with Supabase and PostGIS",
+        "description": "Design and implement the complete PostgreSQL database schema with PostGIS extension for location data, including all core entities and relationships",
+        "details": "Create Supabase project and configure PostgreSQL 15+ with PostGIS extension. Implement tables for Users (profile, phone, ward, jannMatt score), Polls (title, description, location, media, status, votes), Votes (user-poll relationship), Comments (threaded discussions), NGOs (organization details, ward assignments), Achievements (gamification badges), and Notifications. Set up row-level security policies, database indexes for performance optimization, and soft delete functionality. Configure geographic data types for location storage and ward mapping.",
+        "testStrategy": "Create comprehensive database tests including schema validation, constraint testing, PostGIS functionality verification, and performance testing with sample data. Test row-level security policies and index effectiveness.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Supabase project initialization and PostGIS configuration",
+            "description": "Set up new Supabase project, enable PostGIS extension for geographic data handling, configure database connection settings, and establish initial project structure with environment variables",
+            "dependencies": [],
+            "details": "Create Supabase project, enable PostGIS extension, configure connection strings, set up environment variables for database access, and verify spatial data capabilities",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Core entity table creation (Users, Polls, Votes)",
+            "description": "Create fundamental database tables for Users with authentication integration, Polls with geographic constraints, and Votes with proper relationships and constraints",
+            "dependencies": [
+              1
+            ],
+            "details": "Design and implement Users table with Supabase Auth integration, Polls table with ward-based geographic filtering, and Votes table with foreign key relationships and voting constraints",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Supporting table implementation (Comments, NGOs, Achievements, Notifications)",
+            "description": "Implement secondary tables for Comments on polls, NGO profiles and verification, user Achievements system, and Notifications with proper indexing",
+            "dependencies": [
+              2
+            ],
+            "details": "Create Comments table with hierarchical structure, NGOs table with verification status, Achievements table for gamification, and Notifications table with user targeting",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Geographic data types and ward mapping setup",
+            "description": "Configure PostGIS geographic data types, implement ward boundary mapping, set up spatial indexes, and create geographic query functions for location-based features",
+            "dependencies": [
+              1
+            ],
+            "details": "Define GEOMETRY/GEOGRAPHY columns, import ward boundary data, create spatial indexes, implement location validation functions, and set up geographic search capabilities",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Row-level security policies and indexes",
+            "description": "Implement comprehensive RLS policies for data access control, create performance indexes on frequently queried columns, and establish security rules for all tables",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Configure RLS policies for user data privacy, poll visibility rules, vote anonymity, create B-tree and GiST indexes, and implement role-based access controls",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Soft delete functionality and performance optimization",
+            "description": "Implement soft delete mechanisms across all tables, optimize query performance with materialized views, set up database triggers, and establish monitoring for performance metrics",
+            "dependencies": [
+              4,
+              5
+            ],
+            "details": "Add deleted_at columns, create soft delete triggers, implement materialized views for analytics, optimize geographic queries, and set up performance monitoring dashboards",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Authentication System with Phone OTP",
+        "description": "Implement phone number + OTP authentication system using Supabase Auth and Msg91 SMS gateway",
+        "details": "Set up Supabase Auth with custom phone number authentication flow. Integrate Msg91 SMS gateway for OTP delivery with endpoints /auth/send-otp and /auth/verify-otp. Implement JWT token-based session management with Redux Persist for state persistence. Create user registration flow with profile creation, phone verification, and basic preferences setup. Include rate limiting for OTP requests and security measures against brute force attacks.",
+        "testStrategy": "Test OTP generation and verification flow, JWT token validation, session persistence, rate limiting functionality, and error handling for invalid phone numbers or expired OTPs. Mock Msg91 API for unit tests.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Supabase Auth Configuration for Phone Authentication",
+            "description": "Set up Supabase authentication service with phone number authentication enabled. Configure authentication providers, phone verification settings, and establish database schema for user authentication data.",
+            "dependencies": [],
+            "details": "Configure Supabase project settings for phone auth, set up authentication policies, create user tables with phone number fields, and establish secure connection between frontend and Supabase auth service.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Msg91 SMS Gateway Integration with OTP Endpoints",
+            "description": "Integrate Msg91 SMS service for sending OTP messages. Create API endpoints for OTP generation, sending, and verification with proper error handling and retry mechanisms.",
+            "dependencies": [],
+            "details": "Set up Msg91 API credentials, create OTP generation logic, implement SMS sending functionality, build verification endpoints, and add proper error handling for SMS delivery failures.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "JWT Token Management and Redux Persist Setup",
+            "description": "Implement JWT token handling system with Redux for state management and Redux Persist for maintaining authentication state across app sessions.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Configure Redux store with authentication reducers, implement JWT token storage and refresh logic, set up Redux Persist for offline authentication state, and create middleware for token validation.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "User Registration Flow and Profile Creation",
+            "description": "Build complete user registration workflow including phone verification, OTP validation, and initial profile setup with form validation and user experience optimization.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Create registration forms with phone input validation, implement OTP verification UI, build profile creation screens, add form validation logic, and ensure smooth user onboarding experience.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Security Measures Including Rate Limiting and Brute Force Protection",
+            "description": "Implement comprehensive security measures including rate limiting for OTP requests, brute force attack prevention, and additional security validations for authentication endpoints.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Add rate limiting middleware for OTP endpoints, implement account lockout mechanisms, create IP-based request throttling, add CAPTCHA for suspicious activities, and establish monitoring for security events.",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "React Native App Foundation with Expo",
+        "description": "Set up React Native + Expo project structure with navigation, state management, and UI component library",
+        "details": "Initialize React Native 0.72.6 project with Expo SDK 49. Set up React Navigation with deep linking support for poll sharing. Implement Redux Toolkit with Redux Persist for state management. Create NativeWind (Tailwind for React Native) configuration with MagicUI-inspired reusable components. Set up project structure with screens, components, services, and utilities folders. Configure Expo Push Notification Service and implement basic error boundary handling.",
+        "testStrategy": "Test navigation flows, state persistence, component rendering, deep linking functionality, and Redux store operations. Set up Jest and React Native Testing Library for component testing.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "React Native + Expo Project Initialization and Configuration",
+            "description": "Initialize a new React Native project using Expo CLI, configure project settings, set up development environment, and establish basic project structure with necessary dependencies.",
+            "dependencies": [],
+            "details": "Create new Expo project, configure app.json/app.config.js with proper metadata, set up TypeScript configuration, install essential dependencies, configure ESLint and Prettier, set up development scripts, and establish folder structure for components, screens, services, and utilities.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Navigation Setup with React Navigation and Deep Linking",
+            "description": "Implement React Navigation v6 with stack, tab, and drawer navigators, configure deep linking for URL-based navigation, and set up navigation structure for the app.",
+            "dependencies": [
+              1
+            ],
+            "details": "Install React Navigation packages, create navigation containers and navigators, implement stack navigation for main app flow, set up tab navigation for primary sections, configure deep linking with URL schemes, implement navigation guards and authentication flows, and create reusable navigation utilities.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Redux Toolkit and Redux Persist State Management Implementation",
+            "description": "Set up Redux Toolkit for state management with Redux Persist for data persistence, create store configuration, and implement basic slices for app state.",
+            "dependencies": [
+              1
+            ],
+            "details": "Install Redux Toolkit and Redux Persist packages, configure store with persistence middleware, create root reducer with combined slices, implement authentication slice, user preferences slice, and app settings slice, set up Redux DevTools integration, and create typed hooks for useSelector and useDispatch.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "NativeWind Styling and Reusable Component Library Creation",
+            "description": "Integrate NativeWind for Tailwind CSS styling in React Native, create a comprehensive reusable component library with consistent design system and theming.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Install and configure NativeWind with Tailwind CSS, set up design tokens and theme configuration, create base components (Button, Input, Card, Modal, etc.), implement typography system, color palette, and spacing utilities, create layout components, establish component documentation, and set up Storybook for component development and testing.",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Core API Development with Supabase Edge Functions",
+        "description": "Develop foundational API structure using Supabase Edge Functions with comprehensive error handling and validation",
+        "details": "Create Supabase Edge Functions for core API endpoints including user management, poll CRUD operations, voting system, and comment management. Implement comprehensive error handling, input validation using Zod schemas, and API documentation with OpenAPI specification. Set up CORS configuration, rate limiting, and request/response logging. Create API client service in React Native with automatic retry logic and offline queue functionality.",
+        "testStrategy": "Create API integration tests for all endpoints, test error handling scenarios, validate request/response schemas, and test rate limiting functionality. Use Postman/Insomnia for manual API testing.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Supabase Edge Functions Setup and Configuration",
+            "description": "Set up Supabase Edge Functions environment, configure deployment pipeline, and establish authentication middleware for API endpoints",
+            "dependencies": [],
+            "details": "Initialize Supabase CLI, create edge function templates, configure environment variables, set up CORS policies, implement JWT authentication middleware, and establish deployment scripts for staging and production environments",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Core CRUD Endpoints for Users and Polls",
+            "description": "Develop RESTful API endpoints for user management and poll operations including create, read, update, and delete functionality",
+            "dependencies": [
+              1
+            ],
+            "details": "Create user registration/profile endpoints, implement poll creation with validation, develop poll retrieval with filtering and pagination, add poll update/delete with ownership verification, and include proper HTTP status codes and response formatting",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Voting and Comment Management APIs",
+            "description": "Build specialized endpoints for handling poll voting mechanics and comment system with real-time capabilities",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement vote submission with duplicate prevention, create comment CRUD operations, add vote tallying and results aggregation, implement real-time updates using Supabase subscriptions, and handle vote changes and comment threading",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Error Handling, Validation, and API Documentation",
+            "description": "Implement comprehensive error handling, request validation schemas, and generate complete API documentation",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Create Zod validation schemas for all endpoints, implement standardized error response format, add rate limiting and security headers, generate OpenAPI/Swagger documentation, create API testing suite, and implement logging and monitoring",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "React Native API Client with Retry Logic and Offline Queue",
+            "description": "Develop robust React Native API client with automatic retry mechanisms, offline support, and request queueing",
+            "dependencies": [
+              4
+            ],
+            "details": "Create TypeScript API client with axios/fetch wrapper, implement exponential backoff retry logic, build offline request queue with AsyncStorage, add network state detection, implement optimistic updates, and create React hooks for API integration with error boundaries",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Poll Creation System with Media Upload",
+        "description": "Implement comprehensive poll creation flow with photo capture, location selection, and category management",
+        "details": "Create multi-step poll creation interface with title/description input, photo capture using Expo Camera API, and GPS location selection with Google Maps integration. Implement Supabase Storage for image uploads with Cloudinary integration for optimization. Add category selection system, form validation with real-time feedback, and automatic ward tagging based on GPS coordinates. Include draft saving functionality and preview before submission.",
+        "testStrategy": "Test photo capture and upload functionality, GPS location accuracy, form validation, ward detection logic, and draft persistence. Test on various device types and network conditions.",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          4
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Multi-step form interface design and validation",
+            "description": "Design and implement a multi-step form interface for poll creation with comprehensive validation logic, including form state management, progress indicators, and user input validation across all steps.",
+            "dependencies": [],
+            "details": "Create reusable form components, implement step navigation, add real-time validation, error handling, and form state persistence between steps. Include accessibility features and responsive design.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Photo capture integration with Expo Camera API",
+            "description": "Integrate Expo Camera API to enable users to capture photos directly within the poll creation flow, including camera permissions, image preview, and retake functionality.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement camera component with proper permissions handling, photo capture functionality, image preview with crop/edit options, and integration with the multi-step form workflow.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "GPS location selection and Google Maps integration",
+            "description": "Implement GPS location detection and Google Maps integration for location selection during poll creation, including current location detection and manual location picking.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add location permissions, GPS coordinate detection, Google Maps component integration, location search functionality, and location validation within the form workflow.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Supabase Storage and Cloudinary image optimization",
+            "description": "Set up image upload pipeline using Supabase Storage with Cloudinary integration for automatic image optimization, compression, and multiple format generation.",
+            "dependencies": [
+              2
+            ],
+            "details": "Configure Supabase Storage buckets, implement Cloudinary transformation pipeline, add image upload progress tracking, error handling, and optimize for different device capabilities.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Category system and ward auto-tagging",
+            "description": "Implement category selection system and automatic ward tagging based on GPS coordinates, including category management and location-based administrative boundary detection.",
+            "dependencies": [
+              3
+            ],
+            "details": "Create category taxonomy, implement ward boundary detection using GPS coordinates, add auto-tagging logic, and integrate with the form validation system.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Draft saving and preview functionality",
+            "description": "Implement draft saving mechanism and poll preview functionality, allowing users to save incomplete polls and preview final polls before submission.",
+            "dependencies": [
+              1,
+              4,
+              5
+            ],
+            "details": "Add local storage for drafts, implement auto-save functionality, create preview component with all poll elements, and add draft management interface with resume/delete options.",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Voting System with Real-time Updates",
+        "description": "Develop voting mechanism with duplicate prevention, real-time updates, and vote tracking",
+        "details": "Implement voting system with one-vote-per-user constraint using database unique constraints. Set up Supabase Realtime subscriptions for live vote count updates without page refresh. Create vote recording API with timestamp tracking and vote history. Implement anonymous voting option and vote validation to prevent gaming. Add vote count animations and visual feedback for user engagement.",
+        "testStrategy": "Test vote recording accuracy, duplicate prevention, real-time update functionality, anonymous voting, and concurrent voting scenarios. Load test with multiple simultaneous votes.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Vote Recording API with Duplicate Prevention",
+            "description": "Implement secure vote recording API endpoints with database constraints to prevent duplicate votes and ensure data integrity",
+            "dependencies": [],
+            "details": "Create API endpoints for vote submission, implement database schema with unique constraints on user-poll combinations, add rate limiting, validate vote payload structure, handle concurrent vote attempts, and implement proper error responses for duplicate vote scenarios",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Supabase Realtime Subscription Setup",
+            "description": "Configure Supabase realtime subscriptions for live vote count updates and real-time poll state synchronization",
+            "dependencies": [
+              1
+            ],
+            "details": "Set up Supabase realtime channels for poll updates, implement client-side subscription management, handle connection states and reconnection logic, optimize subscription filters for performance, and ensure proper cleanup of subscriptions on component unmount",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Vote Validation and Anti-Gaming Measures",
+            "description": "Implement comprehensive vote validation logic and anti-gaming security measures to prevent vote manipulation",
+            "dependencies": [
+              1
+            ],
+            "details": "Add user authentication verification, implement IP-based rate limiting, detect and prevent bot voting patterns, validate vote timing constraints, implement CAPTCHA for suspicious activity, add audit logging for vote attempts, and create admin tools for monitoring voting patterns",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "UI Animations and Visual Feedback",
+            "description": "Create engaging UI animations and visual feedback systems for voting interactions and real-time updates",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Design vote button animations and state transitions, implement real-time vote count animations, create loading states and success/error feedback, add progress bars for poll results, implement smooth transitions for live updates, and ensure accessibility compliance for all animations",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Poll Discovery and Feed System",
+        "description": "Create location-based poll discovery with filtering, search, and trending algorithms",
+        "details": "Implement ward-based poll feed using PostGIS queries for location filtering. Create search functionality with full-text search capabilities, category-based filtering, and sorting options (newest, trending, nearby). Develop trending algorithm based on vote velocity and engagement metrics. Add infinite scroll pagination, pull-to-refresh functionality, and caching with Redis for performance optimization.",
+        "testStrategy": "Test location-based filtering accuracy, search functionality, trending algorithm effectiveness, pagination performance, and cache invalidation. Test with large datasets and various geographic locations.",
+        "priority": "medium",
+        "dependencies": [
+          5,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "PostGIS Location-based Queries and Ward Filtering",
+            "description": "Implement spatial database queries using PostGIS for location-based discovery and ward-level filtering functionality",
+            "dependencies": [],
+            "details": "Set up PostGIS extensions, create spatial indexes, implement geospatial queries for proximity-based discovery, develop ward boundary filtering, and optimize spatial query performance",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Search Functionality with Full-text Search and Filtering",
+            "description": "Develop comprehensive search capabilities with full-text search engine integration and advanced filtering options",
+            "dependencies": [],
+            "details": "Implement full-text search using PostgreSQL or Elasticsearch, create search indexes, develop filtering mechanisms for categories/tags/attributes, implement search result ranking and relevance scoring",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Trending Algorithm Development and Implementation",
+            "description": "Design and implement algorithms to identify and rank trending content based on user engagement metrics",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Develop trending calculation algorithms considering views, likes, comments, and time decay factors, implement real-time trending updates, create trending content ranking system, and establish trending refresh intervals",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Infinite Scroll Pagination and Pull-to-refresh",
+            "description": "Implement efficient pagination system with infinite scroll and pull-to-refresh functionality for seamless user experience",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Develop cursor-based pagination for infinite scroll, implement pull-to-refresh mechanism, optimize data loading strategies, handle edge cases for empty states and network failures, ensure smooth scrolling performance",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Redis Caching and Performance Optimization",
+            "description": "Implement comprehensive caching strategy using Redis and optimize overall system performance",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Set up Redis caching infrastructure, implement cache strategies for search results, location queries, and trending data, develop cache invalidation mechanisms, optimize database query performance, and implement monitoring for cache hit rates",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "jannMatt Gamification System",
+        "description": "Implement comprehensive gamification system with points, achievements, and leaderboards",
+        "details": "Create jannMatt scoring system with points for civic participation (create poll: +10, vote: +2, comment: +5). Implement achievement badge system with milestone unlocks and progress tracking. Develop ward and city-level leaderboards with real-time updates. Create user profile displays with score visualization and progress indicators. Implement anti-gaming mechanisms including rate limiting, duplicate action prevention, and suspicious activity detection.",
+        "testStrategy": "Test point calculation accuracy, achievement unlock logic, leaderboard ranking, anti-gaming measures effectiveness, and performance with large user bases. Simulate various gaming scenarios.",
+        "priority": "medium",
+        "dependencies": [
+          6,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Point Scoring System and Calculation Logic",
+            "description": "Design and implement a comprehensive point scoring system with configurable rules, multipliers, and calculation algorithms to reward user activities and engagement.",
+            "dependencies": [],
+            "details": "Create scoring algorithms for different user actions, implement point multipliers based on difficulty/importance, design decay mechanisms for time-sensitive activities, build configurable scoring rules engine, and establish point validation and audit trails.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Achievement Badge System with Milestone Tracking",
+            "description": "Develop a badge and achievement system that tracks user progress toward milestones and automatically awards recognition for completed objectives.",
+            "dependencies": [
+              1
+            ],
+            "details": "Design badge categories and rarity levels, implement milestone tracking algorithms, create progress indicators and notifications, build badge display and collection interfaces, and establish achievement unlock conditions based on point thresholds and activities.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Leaderboard Implementation with Real-time Updates",
+            "description": "Build dynamic leaderboards with real-time ranking updates, multiple categories, and efficient data processing to display competitive standings.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement real-time ranking algorithms, create multiple leaderboard categories (daily, weekly, monthly, all-time), build efficient data caching and update mechanisms, design responsive leaderboard UI components, and establish rank change notifications and animations.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Anti-gaming Mechanisms and Suspicious Activity Detection",
+            "description": "Implement security measures and detection algorithms to prevent point manipulation, fake activities, and gaming of the system while maintaining fair play.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Develop anomaly detection algorithms for unusual scoring patterns, implement rate limiting and activity validation, create automated flagging systems for suspicious behavior, build manual review workflows for flagged accounts, and establish point adjustment and penalty mechanisms.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "NGO Verification and Moderation System",
+        "description": "Build NGO onboarding, verification dashboard, and content moderation tools",
+        "details": "Create NGO registration system with organization verification and ward assignment management. Develop verification dashboard showing unverified polls queue with one-click verification and optional comments. Implement moderation tools including content flagging, bulk actions, and moderation logs. Add NGO badge display on verified polls with timestamp. Create NGO analytics dashboard with verification statistics and performance metrics.",
+        "testStrategy": "Test NGO registration flow, verification workflow, moderation tools functionality, badge display accuracy, and analytics data integrity. Test with multiple NGO users and various content scenarios.",
+        "priority": "medium",
+        "dependencies": [
+          7,
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "NGO Registration and Verification Workflow",
+            "description": "Develop a comprehensive registration system for NGOs including application forms, document upload, verification processes, and approval workflows with multi-step validation.",
+            "dependencies": [],
+            "details": "Create registration forms with required fields (organization details, legal documents, contact information), implement document verification system, build approval workflow with admin review stages, add email notifications for status updates, and create NGO profile management interface.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Moderation Dashboard with Poll Queue Management",
+            "description": "Build an administrative dashboard for moderators to manage poll submissions, review content, and handle approval/rejection workflows with queue prioritization.",
+            "dependencies": [
+              1
+            ],
+            "details": "Design moderator interface with poll queue display, implement filtering and sorting options, create review workflow with approve/reject/request changes actions, add bulk operations for efficiency, and integrate with NGO verification status from registration system.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Content Moderation Tools and Flagging System",
+            "description": "Implement comprehensive content moderation features including automated flagging, user reporting mechanisms, and manual review tools for maintaining platform quality.",
+            "dependencies": [
+              2
+            ],
+            "details": "Develop automated content scanning for inappropriate content, create user flagging interface, build moderation action system (warnings, suspensions, bans), implement appeal process, and add moderation history tracking with audit logs.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "NGO Analytics Dashboard and Performance Metrics",
+            "description": "Create analytics and reporting system for NGOs to track their poll performance, engagement metrics, and platform usage statistics with visualization tools.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Build analytics dashboard with poll performance metrics, implement engagement tracking (views, votes, shares), create reporting tools with exportable data, add comparative analytics between polls, and develop performance insights with recommendations for NGO improvement.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Discussion System with Threaded Comments",
+        "description": "Implement comprehensive commenting system with threading, media attachments, and moderation",
+        "details": "Create threaded comment system for poll discussions with nested replies support. Implement photo attachments in comments using Supabase Storage. Add anonymous commenting option with user preference controls. Create comment voting system and implement NGO moderation capabilities with content flagging. Add auto-archive functionality when polls are resolved and implement comment search within discussions.",
+        "testStrategy": "Test comment threading logic, media attachment functionality, anonymous commenting, moderation tools, and auto-archive behavior. Test comment performance with large discussion threads.",
+        "priority": "medium",
+        "dependencies": [
+          8,
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Threaded Comment Structure and Nested Reply Logic",
+            "description": "Implement hierarchical comment system with nested replies, parent-child relationships, and thread navigation",
+            "dependencies": [],
+            "details": "Design database schema for threaded comments with parent_id references, implement recursive query logic for fetching comment trees, create UI components for nested comment display with proper indentation and threading, add reply functionality with depth limits, and implement comment sorting options (chronological, popularity). Include thread collapse/expand functionality and breadcrumb navigation for deep threads.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Media Attachment Functionality with Supabase Storage",
+            "description": "Integrate media upload and attachment system for comments using Supabase Storage",
+            "dependencies": [
+              1
+            ],
+            "details": "Set up Supabase Storage buckets for comment attachments, implement file upload API with validation for supported formats (images, videos, documents), create media preview components with thumbnails and lightbox functionality, add drag-and-drop upload interface, implement file size limits and compression, create media gallery view for comments, and add attachment deletion and management features.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Anonymous Commenting and User Preference Controls",
+            "description": "Implement anonymous commenting system with user preference management and privacy controls",
+            "dependencies": [
+              1
+            ],
+            "details": "Create anonymous user session management, implement user preference settings for comment visibility, notification preferences, and privacy controls, add toggle for anonymous vs authenticated commenting, create user profile settings for comment history and preferences, implement comment author display options (username, anonymous, custom display name), and add user blocking and filtering capabilities.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Comment Moderation, Voting, and Auto-Archive Features",
+            "description": "Build comprehensive moderation system with voting mechanisms and automated archiving functionality",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Implement upvote/downvote system with score calculation, create moderation dashboard with flagging and review workflows, add automated content filtering and spam detection, implement comment reporting system, create auto-archive functionality based on age and activity thresholds, add moderator tools for comment approval/rejection, implement comment editing history and version control, and create analytics dashboard for comment engagement metrics.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Push Notifications and SMS Integration",
+        "description": "Implement comprehensive notification system with push notifications, SMS, and user preferences",
+        "details": "Set up Expo Push Notification Service for mobile push notifications with rich notifications and action buttons. Integrate Msg91 for SMS notifications including critical updates and OTP delivery. Create in-app notification center with notification history, mark as read functionality, and notification grouping. Implement customizable notification preferences allowing users to control notification types and delivery methods. Add notification queue management and delivery tracking.",
+        "testStrategy": "Test push notification delivery, SMS integration, notification preferences, in-app notification center functionality, and notification queue processing. Test on various devices and network conditions.",
+        "priority": "medium",
+        "dependencies": [
+          9,
+          10
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Expo Push Notification Service Setup and Rich Notifications",
+            "description": "Implement Expo Push Notification Service integration with support for rich notifications including images, actions, and custom sounds. Set up push token management and notification payload handling.",
+            "dependencies": [],
+            "details": "Configure Expo push notification credentials, implement token registration and refresh logic, create rich notification templates with media attachments, implement notification action handlers, and set up notification sound customization.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Msg91 SMS Integration for Critical Updates",
+            "description": "Integrate Msg91 SMS service for sending critical notifications and alerts via SMS. Implement SMS templates, delivery confirmation, and fallback mechanisms.",
+            "dependencies": [],
+            "details": "Set up Msg91 API integration, create SMS template system for different notification types, implement SMS delivery status tracking, configure rate limiting and cost optimization, and establish SMS fallback triggers for critical notifications.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "In-App Notification Center with History and Grouping",
+            "description": "Build comprehensive in-app notification center with notification history, categorization, grouping, and interactive features. Include read/unread states and notification actions.",
+            "dependencies": [
+              1
+            ],
+            "details": "Design notification center UI with categorized tabs, implement notification grouping by type and date, create notification history with pagination, add mark as read/unread functionality, implement notification search and filtering, and integrate with push notification data.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "User Notification Preferences and Controls",
+            "description": "Develop user preference system allowing granular control over notification types, channels, timing, and frequency. Include do-not-disturb settings and channel-specific preferences.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Create preference management interface, implement notification type toggles for push/SMS/in-app channels, add quiet hours and do-not-disturb scheduling, create frequency controls for different notification categories, implement preference sync across devices, and establish default preference profiles.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Notification Queue Management and Delivery Tracking",
+            "description": "Implement robust notification queue system with priority handling, retry logic, delivery tracking, and analytics. Include batch processing and performance optimization.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Build notification queue with priority levels, implement retry mechanisms for failed deliveries, create delivery status tracking and reporting, add notification analytics and metrics collection, implement batch processing for bulk notifications, establish queue monitoring and alerting, and optimize for high-volume notification processing.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Real-time Updates and Performance Optimization",
+        "description": "Implement WebSocket connections for real-time updates and optimize overall application performance",
+        "details": "Set up Supabase Realtime WebSocket connections for live vote counting, status change broadcasts, and comment notifications. Implement connection pooling and polling fallback for scalability. Add Redis caching layer with 5-minute TTL for frequently accessed data. Implement image compression, lazy loading, and API response optimization. Add offline mode detection with local data caching and sync queue for offline actions. Configure Cloudflare CDN for static assets and implement error tracking with Sentry.",
+        "testStrategy": "Test real-time update functionality, WebSocket connection stability, caching effectiveness, offline mode behavior, and overall application performance. Load test with concurrent users and monitor error rates.",
+        "priority": "medium",
+        "dependencies": [
+          10,
+          11
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Supabase Realtime WebSocket Setup and Connection Management",
+            "description": "Implement Supabase realtime WebSocket connections with proper connection lifecycle management, reconnection logic, and subscription handling for real-time data updates.",
+            "dependencies": [],
+            "details": "Set up Supabase realtime client, configure WebSocket connection parameters, implement connection state management, add automatic reconnection with exponential backoff, handle subscription management for different data channels, and implement proper cleanup on component unmount.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Redis Caching Implementation with TTL Management",
+            "description": "Implement Redis caching layer with intelligent TTL management, cache invalidation strategies, and optimized data retrieval patterns.",
+            "dependencies": [],
+            "details": "Set up Redis client configuration, implement caching middleware for API responses, configure TTL policies for different data types, add cache invalidation logic, implement cache warming strategies, and create cache hit/miss monitoring.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Image Compression and Lazy Loading Optimization",
+            "description": "Implement advanced image optimization including compression, format conversion, lazy loading, and progressive loading techniques.",
+            "dependencies": [],
+            "details": "Set up image compression pipeline with WebP/AVIF support, implement intersection observer for lazy loading, add progressive image loading with blur placeholders, configure responsive image sizing, and implement image caching strategies.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Offline Mode Detection and Sync Queue",
+            "description": "Implement offline mode detection with background sync queue management for seamless user experience during network interruptions.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add network status detection, implement offline data storage with IndexedDB, create sync queue for pending operations, handle conflict resolution for offline changes, implement background sync when connection is restored, and manage WebSocket reconnection after offline periods.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "CDN Configuration and Static Asset Optimization",
+            "description": "Configure CDN for optimal static asset delivery with proper caching headers, compression, and geographic distribution.",
+            "dependencies": [
+              3
+            ],
+            "details": "Set up CDN configuration with multiple edge locations, configure cache headers for different asset types, implement asset bundling and minification, add Brotli/Gzip compression, configure image CDN integration, and implement cache purging strategies.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Error Tracking and Monitoring Setup",
+            "description": "Implement comprehensive error tracking, performance monitoring, and alerting system for proactive issue detection and resolution.",
+            "dependencies": [
+              1,
+              2,
+              4
+            ],
+            "details": "Set up error tracking service integration, implement performance monitoring with Core Web Vitals, add real-time error alerting, create custom dashboards for system health, implement log aggregation, and configure automated incident response workflows.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-22T21:22:19.220Z",
+      "updated": "2025-06-22T23:46:20.692Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

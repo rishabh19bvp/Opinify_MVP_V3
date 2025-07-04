@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "opinify-app",
+    "slug": "opinify-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.opinify-app"
+    },
+    "android": {},
+    "web": {},
+    "scheme": "opinify-app",
+    "plugins": []
+  }
+}

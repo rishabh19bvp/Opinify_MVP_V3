@@ -1,0 +1,502 @@
+# Overview
+Opinify is a hyperlocal civic engagement platform that empowers citizens to report, discuss, and resolve community issues through poll-based escalation. It bridges the gap between citizens and local governance by providing a transparent, gamified system where community members can report civic issues (potholes, water problems, etc.), vote on priority issues, and track resolution progress. The platform leverages NGO partnerships for verification and creates accountability through real-time tracking and community engagement.
+
+Target Users:
+- Citizens: Urban residents who want to report and track civic issues
+- NGOs: Organizations that verify and help resolve community issues  
+- Government Officials: Local authorities who need data-driven insights for resource allocation
+
+Key Value Propositions:
+- Simple, mobile-first civic issue reporting with photo/location
+- Community-driven prioritization through voting
+- NGO verification for trust and credibility
+- Gamification (jannMatt scores) to encourage participation
+- Real-time tracking of issue resolution
+
+# Core Features
+
+## Poll-Based Issue Reporting
+- Citizens create polls for civic issues with title, description, photos, and GPS location
+- Polls automatically tagged to specific wards based on location
+- Community members vote to prioritize issues
+- Issues escalate to authorities based on vote thresholds
+- Real-time vote count updates without page refresh
+
+## NGO Verification System  
+- NGOs verify reported issues for authenticity
+- Verification dashboard for assigned wards
+- One-click verification with optional comments
+- Verified polls display NGO badge and timestamp
+- Moderation tools for inappropriate content
+
+## jannMatt Gamification System
+- Points awarded for civic participation (create poll: +10, vote: +2, comment: +5)
+- Achievement badges unlock at milestones
+- Ward and city-level leaderboards
+- Profile displays score with progress indicators
+- Anti-gaming mechanisms to prevent fake activities
+
+## Hyperlocal Discussion Threads
+- Each poll has associated discussion thread
+- Anonymous or profile-based commenting
+- Photo attachments in comments
+- NGO moderation capabilities
+- Auto-archive when polls are resolved
+
+## Real-time Updates & Notifications
+- Push notifications for poll updates
+- SMS notifications for critical updates
+- In-app notification center
+- Customizable notification preferences
+- Real-time vote count and status changes
+
+## Location-Based Discovery
+- Ward-wise issue exploration
+- Map view of nearby issues
+- Category-based filtering
+- Trending issues by location
+- Success stories showcase
+
+# User Experience
+
+## User Personas
+
+### Primary: Civic-Minded Resident (Priya Sharma)
+- Age: 32, Software Engineer, Kothrud
+- Tech-savvy urban professional
+- Frustrated with unresponsive government portals
+- Wants tangible impact from civic participation
+- Journey: Discovers issue → Reports via app → Engages community → Tracks resolution → Shares success
+
+### Secondary: NGO Coordinator (Rajesh Patil)  
+- Age: 45, NGO Program Manager
+- 15+ years civic work experience
+- Needs efficient verification tools
+- Wants measurable community impact
+- Journey: Reviews unverified polls → Verifies genuine issues → Moderates discussions → Tracks impact
+
+### Tertiary: Local Government Official (Sunita Desai)
+- Age: 38, PMC Ward Officer
+- Overwhelmed by unstructured complaints
+- Needs data-driven prioritization
+- Journey: Views prioritized issues → Allocates resources → Updates resolution status → Reviews citizen satisfaction
+
+## Key User Flows
+
+### Issue Reporting Flow
+1. Open app → Tap create poll button
+2. Enter title and description
+3. Take/upload photos of issue
+4. Confirm GPS location on map
+5. Select issue category
+6. Review and submit poll
+7. Share poll link with community
+
+### Voting & Engagement Flow
+1. Browse feed of local issues
+2. Tap poll to view details
+3. Review photos and description
+4. Vote if issue affects you
+5. Add comment or suggestion
+6. Track vote count increase
+7. Receive achievement points
+
+### NGO Verification Flow
+1. Access verification dashboard
+2. View unverified polls by ward
+3. Review poll details and evidence
+4. Verify or flag for moderation
+5. Add verification comment
+6. Update verification status
+
+## UI/UX Considerations
+- Mobile-first responsive design
+- Minimal cognitive load for reporting
+- Clear verification indicators
+- Familiar UI patterns for Indian users
+- Offline mode for basic functionality
+- Accessibility features (WCAG 2.1 AA)
+- Support for local languages
+
+# Technical Architecture
+
+## System Components
+
+### Frontend Architecture
+- Mobile App: React Native + Expo for cross-platform development
+- UI Framework: NativeWind (Tailwind for React Native) + MagicUI-inspired components
+- State Management: Redux Toolkit with Redux Persist
+- Navigation: React Navigation with deep linking support
+- Real-time: Supabase Realtime subscriptions
+
+### Backend Architecture  
+- Backend Service: Supabase (PostgreSQL + Edge Functions + Auth + Storage)
+- Database: PostgreSQL with PostGIS for location data
+- Authentication: Supabase Auth with OTP verification
+- File Storage: Supabase Storage for images/videos
+- Real-time: WebSocket connections for live updates
+- Caching: Redis for performance optimization
+
+### Third-Party Integrations
+- SMS Gateway: Msg91 for OTP and notifications
+- Push Notifications: Expo Push Notification Service
+- Maps: Google Maps API for location services
+- Image Processing: Cloudinary for optimization
+- Analytics: Supabase Analytics + custom events
+
+## Data Models
+
+### Core Entities
+- Users: Profile, phone, ward, jannMatt score, preferences
+- Polls: Title, description, location, media, status, votes
+- Votes: User-poll relationship with timestamps
+- Comments: Threaded discussions with moderation
+- NGOs: Organization details, ward assignments, verification history
+- Achievements: Gamification badges and milestones
+- Notifications: Push/SMS notification queue
+
+### Key Relationships
+- Users create Polls (1:N)
+- Users vote on Polls (M:N with constraints)
+- Polls have Comments (1:N)
+- NGOs verify Polls (M:N)
+- Users earn Achievements (M:N)
+
+## APIs and Integrations
+
+### Internal APIs
+- Authentication: /auth/send-otp, /auth/verify-otp
+- Polls: CRUD operations, voting, status updates
+- Users: Profile management, preferences
+- NGO: Verification endpoints, moderation tools
+- Analytics: Event tracking, report generation
+- Notifications: Push/SMS delivery
+
+### External APIs
+- Msg91: SMS OTP and notifications
+- Google Maps: Geocoding and ward mapping
+- Cloudinary: Image upload and processing
+- Expo Push: Mobile push notifications
+
+## Infrastructure Requirements
+- Hosting: Vercel for web, Supabase cloud
+- Database: PostgreSQL 15+ with PostGIS
+- Cache: Redis for session and data caching
+- CDN: Cloudflare for static assets
+- Monitoring: Sentry for error tracking
+- Analytics: Built-in Supabase analytics
+
+# Development Roadmap
+
+## Phase 1: Foundation & Core Infrastructure
+### Authentication System
+- Implement phone number + OTP authentication
+- User registration and profile creation
+- Session management with JWT tokens
+- Basic user preferences setup
+
+### Database Setup
+- Design and implement complete database schema
+- Set up row-level security policies
+- Configure database indexes for performance
+- Implement soft delete functionality
+
+### Basic Mobile App Structure
+- Set up React Native + Expo project
+- Implement navigation structure
+- Create reusable UI component library
+- Set up state management with Redux
+
+### Core API Development
+- User management endpoints
+- Basic CRUD operations structure
+- Error handling and validation
+- API documentation setup
+
+## Phase 2: Poll Management System
+### Poll Creation
+- Multi-step poll creation flow
+- Photo capture and upload
+- Location selection with map interface
+- Category selection system
+- Form validation and error handling
+
+### Voting System
+- Vote recording with duplicate prevention
+- Real-time vote count updates
+- Vote history tracking
+- Anonymous voting option
+
+### Poll Discovery
+- Location-based poll feed
+- Search functionality
+- Category filtering
+- Sorting options (newest, trending, nearby)
+
+### Basic Comments
+- Add comments to polls
+- View comment threads
+- Delete own comments
+- Comment count tracking
+
+## Phase 3: Community Features
+### User Profiles
+- Profile creation and editing
+- Profile photo upload
+- Activity history display
+- Privacy settings
+
+### Gamification Implementation
+- jannMatt scoring system
+- Achievement badges
+- Points calculation engine
+- Leaderboard generation
+- Anti-gaming measures
+
+### Enhanced Discussion System
+- Threaded comment replies
+- Photo attachments in comments
+- Anonymous commenting option
+- Comment voting
+
+### Social Features
+- Share polls externally
+- Follow other users
+- Activity feed
+- User mentions in comments
+
+## Phase 4: NGO Integration
+### NGO Onboarding
+- NGO registration system
+- Ward assignment management
+- Admin user creation
+- Verification documentation
+
+### Verification Dashboard
+- Unverified polls queue
+- Bulk verification tools
+- Verification history
+- Performance metrics
+
+### Moderation Tools
+- Content flagging system
+- Moderation queue
+- Ban/suspension tools
+- Moderation logs
+
+### NGO Analytics
+- Verification statistics
+- Ward performance metrics
+- Resolution tracking
+- Report generation
+
+## Phase 5: Notifications & Real-time
+### Push Notifications
+- Expo push notification setup
+- Notification preferences
+- Rich notifications with actions
+- Notification history
+
+### SMS Integration
+- Msg91 integration
+- OTP delivery system
+- Critical update notifications
+- SMS preferences
+
+### Real-time Updates
+- WebSocket connections
+- Live vote counting
+- Status change broadcasts
+- Comment notifications
+
+### Notification Center
+- In-app notification feed
+- Mark as read functionality
+- Notification grouping
+- Clear all option
+
+## Phase 6: Advanced Features
+### Location Services
+- GPS-based ward detection
+- Interactive map view
+- Nearby issues display
+- Location-based notifications
+
+### Analytics Dashboard
+- User engagement metrics
+- Poll resolution tracking
+- Geographic insights
+- Export functionality
+
+### Search & Discovery
+- Full-text search
+- Advanced filters
+- Saved searches
+- Search suggestions
+
+### Admin Panel
+- User management
+- System configuration
+- Content moderation
+- Analytics overview
+
+## Phase 7: Polish & Optimization
+### Performance Optimization
+- Image compression
+- Lazy loading
+- Cache implementation
+- API response optimization
+
+### UI/UX Refinements
+- Animation polish
+- Loading states
+- Error handling
+- Accessibility improvements
+
+### Offline Functionality
+- Offline mode detection
+- Local data caching
+- Queue for offline actions
+- Sync when online
+
+### Security Hardening
+- Security audit
+- Penetration testing
+- Rate limiting
+- Data encryption
+
+## Phase 8: Launch Preparation
+### Testing Suite
+- Unit test coverage
+- Integration testing
+- E2E test scenarios
+- Performance testing
+
+### Documentation
+- User guides
+- API documentation
+- Deployment guides
+- Troubleshooting docs
+
+### App Store Preparation
+- Store listings
+- Screenshots and videos
+- Privacy policy
+- Terms of service
+
+### Launch Infrastructure
+- Production deployment
+- Monitoring setup
+- Backup procedures
+- Support system
+
+# Logical Dependency Chain
+
+## Foundation Layer (Must be built first)
+1. **Database Schema & Setup** - All features depend on data structure
+2. **Authentication System** - Required for user identification
+3. **Basic API Structure** - Foundation for all endpoints
+4. **Core Mobile App Shell** - Navigation and state management
+
+## Core Functionality Layer
+1. **User Management** - Required for all user actions
+2. **Poll Creation** - Core feature that enables voting
+3. **Voting System** - Enables community prioritization
+4. **Basic Feed Display** - Makes polls discoverable
+
+## Engagement Layer
+1. **Comments System** - Builds on existing polls
+2. **User Profiles** - Enables identity and achievements
+3. **Gamification** - Requires user profiles and actions
+4. **Search & Filters** - Enhances poll discovery
+
+## Trust Layer
+1. **NGO Registration** - Prerequisite for verification
+2. **Verification System** - Builds credibility
+3. **Moderation Tools** - Maintains content quality
+4. **Analytics** - Provides insights for NGOs
+
+## Communication Layer
+1. **Push Notifications** - Requires user preferences
+2. **SMS Integration** - Alternative notification channel
+3. **Real-time Updates** - Enhances user experience
+4. **Notification Preferences** - User control
+
+## Enhancement Layer
+1. **Advanced Search** - Builds on basic search
+2. **Map Integration** - Visual location features
+3. **Offline Mode** - Improves accessibility
+4. **Performance Optimization** - Overall improvement
+
+# Risks and Mitigations
+
+## Technical Risks
+
+### Supabase Service Dependency
+- **Risk**: Single point of failure if Supabase has outages
+- **Mitigation**: Implement Redis caching layer, design for offline functionality, maintain local data copies
+
+### Mobile App Performance
+- **Risk**: Poor performance on low-end devices common in India
+- **Mitigation**: Aggressive optimization, image compression, lazy loading, minimal app size
+
+### Real-time Scalability
+- **Risk**: WebSocket connections may not scale efficiently
+- **Mitigation**: Implement connection pooling, use polling fallback, optimize subscription granularity
+
+## Product Risks
+
+### Low User Adoption
+- **Risk**: Citizens may not adopt another civic app
+- **Mitigation**: Strong NGO partnerships for credibility, gamification for engagement, tangible success stories
+
+### Content Quality
+- **Risk**: Spam or fake issues polluting the platform
+- **Mitigation**: NGO verification system, community moderation, rate limiting, ML-based spam detection
+
+### Government Resistance
+- **Risk**: Local authorities may not cooperate
+- **Mitigation**: Start with NGO-driven resolutions, demonstrate value through data, gradual government engagement
+
+## Development Risks
+
+### Scope Creep
+- **Risk**: Feature additions delaying MVP launch
+- **Mitigation**: Strict MVP definition, phased development, change control process
+
+### Technical Debt
+- **Risk**: Rushing development creating maintenance issues
+- **Mitigation**: Code review process, automated testing, refactoring sprints
+
+### Team Capacity
+- **Risk**: Small team overwhelmed by development scope
+- **Mitigation**: Realistic timeline, external contractors for specific skills, comprehensive documentation
+
+# Appendix
+
+## Research Findings
+- 82% of urban Indians trust NGO-verified information
+- 67% participate in community WhatsApp groups
+- 45% increase in engagement with gamification
+- Average session time on civic apps: 3-5 minutes
+
+## Technical Specifications
+- React Native 0.72.6 with Expo SDK 49
+- PostgreSQL 15 with PostGIS extension
+- Supabase Auth with JWT tokens
+- Redis for caching with 5-minute TTL
+- Target devices: Android 7+ and iOS 13+
+
+## Success Metrics
+- 5,000 DAU within 3 months
+- 70% issue resolution rate
+- 40% Day-7 retention
+- 4.5+ app store rating
+- 80% NGO verification rate
+
+## Key Differentiators
+- Poll-based prioritization (unique to India)
+- NGO verification layer for trust
+- jannMatt gamification system
+- Hyperlocal ward-based approach
+- Real-time tracking and updates

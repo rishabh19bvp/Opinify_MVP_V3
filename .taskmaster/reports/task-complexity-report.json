@@ -1,0 +1,109 @@
+{
+	"meta": {
+		"generatedAt": "2025-06-22T21:25:49.496Z",
+		"tasksAnalyzed": 12,
+		"totalTasks": 12,
+		"analysisCount": 12,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": false
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Database Schema Setup with Supabase and PostGIS",
+			"complexityScore": 8,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break down the database schema setup into: 1) Supabase project initialization and PostGIS configuration, 2) Core entity table creation (Users, Polls, Votes), 3) Supporting table implementation (Comments, NGOs, Achievements, Notifications), 4) Geographic data types and ward mapping setup, 5) Row-level security policies and indexes, 6) Soft delete functionality and performance optimization",
+			"reasoning": "High complexity due to multiple interconnected database entities, PostGIS spatial configuration, security policies, and performance considerations. Critical foundation task requiring careful design."
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Authentication System with Phone OTP",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Divide authentication implementation into: 1) Supabase Auth configuration for phone authentication, 2) Msg91 SMS gateway integration with OTP endpoints, 3) JWT token management and Redux Persist setup, 4) User registration flow and profile creation, 5) Security measures including rate limiting and brute force protection",
+			"reasoning": "Moderately high complexity involving third-party integrations, security considerations, and state management. Critical for user onboarding and security."
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "React Native App Foundation with Expo",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Structure the app foundation into: 1) React Native + Expo project initialization and configuration, 2) Navigation setup with React Navigation and deep linking, 3) Redux Toolkit and Redux Persist state management implementation, 4) NativeWind styling and reusable component library creation",
+			"reasoning": "Medium-high complexity involving multiple framework integrations and architectural decisions. Foundation task that impacts all future development."
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Core API Development with Supabase Edge Functions",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down API development into: 1) Supabase Edge Functions setup and configuration, 2) Core CRUD endpoints for users and polls, 3) Voting and comment management APIs, 4) Error handling, validation, and API documentation, 5) React Native API client with retry logic and offline queue",
+			"reasoning": "High complexity due to comprehensive API design, error handling, validation schemas, and client-side integration requirements."
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "Poll Creation System with Media Upload",
+			"complexityScore": 8,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Divide poll creation into: 1) Multi-step form interface design and validation, 2) Photo capture integration with Expo Camera API, 3) GPS location selection and Google Maps integration, 4) Supabase Storage and Cloudinary image optimization, 5) Category system and ward auto-tagging, 6) Draft saving and preview functionality",
+			"reasoning": "High complexity involving multiple device APIs, third-party services, geographic processing, and complex user workflows."
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Voting System with Real-time Updates",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Structure voting system into: 1) Vote recording API with duplicate prevention constraints, 2) Supabase Realtime subscription setup for live updates, 3) Vote validation and anti-gaming measures, 4) UI animations and visual feedback implementation",
+			"reasoning": "Medium-high complexity with real-time functionality, data integrity constraints, and user experience considerations."
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Poll Discovery and Feed System",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down discovery system into: 1) PostGIS location-based queries and ward filtering, 2) Search functionality with full-text search and filtering, 3) Trending algorithm development and implementation, 4) Infinite scroll pagination and pull-to-refresh, 5) Redis caching and performance optimization",
+			"reasoning": "High complexity involving spatial queries, search algorithms, performance optimization, and complex data filtering requirements."
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "jannMatt Gamification System",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Divide gamification into: 1) Point scoring system and calculation logic, 2) Achievement badge system with milestone tracking, 3) Leaderboard implementation with real-time updates, 4) Anti-gaming mechanisms and suspicious activity detection",
+			"reasoning": "Medium-high complexity with scoring algorithms, real-time leaderboards, and anti-abuse measures requiring careful design."
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "NGO Verification and Moderation System",
+			"complexityScore": 5,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Structure NGO system into: 1) NGO registration and verification workflow, 2) Moderation dashboard with poll queue management, 3) Content moderation tools and flagging system, 4) NGO analytics dashboard and performance metrics",
+			"reasoning": "Medium complexity with workflow management, user role systems, and administrative interfaces."
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Discussion System with Threaded Comments",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down discussion system into: 1) Threaded comment structure and nested reply logic, 2) Media attachment functionality with Supabase Storage, 3) Anonymous commenting and user preference controls, 4) Comment moderation, voting, and auto-archive features",
+			"reasoning": "Medium-high complexity with hierarchical data structures, media handling, and moderation capabilities."
+		},
+		{
+			"taskId": 11,
+			"taskTitle": "Push Notifications and SMS Integration",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Divide notification system into: 1) Expo Push Notification Service setup and rich notifications, 2) Msg91 SMS integration for critical updates, 3) In-app notification center with history and grouping, 4) User notification preferences and controls, 5) Notification queue management and delivery tracking",
+			"reasoning": "High complexity with multiple notification channels, user preferences, queue management, and delivery tracking requirements."
+		},
+		{
+			"taskId": 12,
+			"taskTitle": "Real-time Updates and Performance Optimization",
+			"complexityScore": 8,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Structure optimization into: 1) Supabase Realtime WebSocket setup and connection management, 2) Redis caching implementation with TTL management, 3) Image compression and lazy loading optimization, 4) Offline mode detection and sync queue, 5) CDN configuration and static asset optimization, 6) Error tracking and monitoring setup",
+			"reasoning": "High complexity involving multiple performance optimization techniques, real-time connections, caching strategies, and monitoring systems."
+		}
+	]
+}

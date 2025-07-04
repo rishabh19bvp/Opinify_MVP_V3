@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2",
+    "https://deno.land/x/servest@v1.3.1/": "https://deno.land/x/servest@v1.3.1/",
+    "zod": "https://deno.land/x/zod/mod.ts"
+  }
+} 
